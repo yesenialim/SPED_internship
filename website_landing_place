@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AbilityIntern - Special Needs Internship Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4a6fa5;
+            --secondary: #ff9e44;
+            --accent: #6fb3b8;
+            --light: #f5f7fb;
+            --dark: #2c3e50;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary), #2c3e50);
+            color: white;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo h1 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+        
+        .logo-icon {
+            font-size: 2rem;
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--secondary);
+        }
+        
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid white;
+            color: white;
+        }
+        
+        .btn-outline:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        .btn-primary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #ff8c2a;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(74, 111, 165, 0.9), rgba(44, 62, 80, 0.9)), url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .search-box {
+            background: white;
+            border-radius: 50px;
+            padding: 0.5rem;
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .search-box input {
+            flex: 1;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            outline: none;
+            font-size: 1rem;
+        }
+        
+        .search-box button {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 0.8rem 1.5rem;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 4rem 2rem;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .feature-card {
+            background: var(--light);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        /* Internship Listings */
+        .internships {
+            padding: 4rem 2rem;
+            background: var(--light);
+        }
+        
+        .filters {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .filter-options {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .filter-select {
+            padding: 0.6rem;
+            border-radius: 4px;
+            border: 1px solid var(--light-gray);
+            background: white;
+        }
+        
+        .internship-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .internship-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+        }
+        
+        .internship-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .internship-img {
+            height: 160px;
+            background-color: var(--accent);
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .internship-content {
+            padding: 1.5rem;
+        }
+        
+        .company {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        
+        .internship-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .internship-meta {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+        
+        .tag {
+            background: var(--light);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+        
+        .tag.accommodation {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+        
+        /* How It Works */
+        .how-it-works {
+            padding: 4rem 2rem;
+            background: white;
+        }
+        
+        .steps {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            flex-wrap: wrap;
+        }
+        
+        .step {
+            text-align: center;
+            max-width: 250px;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+        }
+        
+        /* Testimonials */
+        .testimonials {
+            padding: 4rem 2rem;
+            background: var(--light);
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+            font-style: italic;
+            color: var(--dark);
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--accent);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+        
+        /* Call to Action */
+        .cta {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, var(--primary), #2c3e50);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: var(--secondary);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+        
+        .social-links a:hover {
+            background: var(--secondary);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            nav ul {
+                display: none;
+            }
+            
+            .hero h2 {
+                font-size: 2rem;
+            }
+            
+            .filters {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+        
+        .accessibility-tools {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+        }
+        
+        .accessibility-btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            border: none;
+        }
+        
+        .accessibility-menu {
+            position: absolute;
+            bottom: 70px;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            display: none;
+            width: 250px;
+        }
+        
+        .accessibility-menu.show {
+            display: block;
+        }
+        
+        .accessibility-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.8rem;
+        }
+        
+        .accessibility-option:last-child {
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <div class="logo-icon"><i class="fas fa-hands-helping"></i></div>
+                <h1>AbilityIntern</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Internships</a></li>
+                    <li><a href="#">Resources</a></li>
+                    <li><a href="#">Employers</a></li>
+                    <li><a href="#">Success Stories</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <button class="btn btn-outline">Log In</button>
+                <button class="btn btn-primary">Sign Up</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h2>Find the Perfect Internship for Your Unique Abilities</h2>
+            <p>AbilityIntern connects students with special needs to inclusive employers who value diversity and provide supportive work environments.</p>
+            <div class="search-box">
+                <input type="text" placeholder="Search internships by role, company, or skill...">
+                <button>Search</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features">
+        <div class="section-title">
+            <h2>Why Choose AbilityIntern?</h2>
+            <p>We're dedicated to creating inclusive opportunities for students of all abilities</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-wheelchair"></i>
+                </div>
+                <h3>Accessibility First</h3>
+                <p>All internships listed provide necessary accommodations and accessible workplaces.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-hand-holding-heart"></i>
+                </div>
+                <h3>Supportive Employers</h3>
+                <p>Our partner employers are trained in inclusive practices and supportive management.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+                <h3>Career Preparation</h3>
+                <p>Get help with resumes, interviews, and workplace readiness skills.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Internship Listings -->
+    <section class="internships">
+        <div class="section-title">
+            <h2>Featured Internships</h2>
+            <p>Explore opportunities from inclusive employers</p>
+        </div>
+        <div class="filters">
+            <h3>Filter By:</h3>
+            <div class="filter-options">
+                <select class="filter-select">
+                    <option>Industry</option>
+                    <option>Technology</option>
+                    <option>Healthcare</option>
+                    <option>Education</option>
+                    <option>Non-profit</option>
+                </select>
+                <select class="filter-select">
+                    <option>Location</option>
+                    <option>Remote</option>
+                    <option>New York</option>
+                    <option>California</option>
+                    <option>Texas</option>
+                </select>
+                <select class="filter-select">
+                    <option>Duration</option>
+                    <option>Summer</option>
+                    <option>Semester</option>
+                    <option>Short-term</option>
+                </select>
+                <select class="filter-select">
+                    <option>Accommodations</option>
+                    <option>Wheelchair Access</option>
+                    <option>Flexible Hours</option>
+                    <option>Mentor Support</option>
+                </select>
+            </div>
+        </div>
+        <div class="internship-grid">
+            <div class="internship-card">
+                <div class="internship-img" style="background-color: #6fb3b8;"></div>
+                <div class="internship-content">
+                    <div class="company">
+                        <i class="fas fa-building"></i>
+                        <span>TechForAll</span>
+                    </div>
+                    <h3>Software Testing Intern</h3>
+                    <p>Join our QA team to help ensure our products are accessible to all users.</p>
+                    <div class="internship-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Remote</span>
+                        <span><i class="fas fa-clock"></i> Part-time</span>
+                    </div>
+                    <span class="tag accommodation">Wheelchair Accessible</span>
+                    <span class="tag accommodation">Flexible Schedule</span>
+                </div>
+            </div>
+            <div class="internship-card">
+                <div class="internship-img" style="background-color: #4a6fa5;"></div>
+                <div class="internship-content">
+                    <div class="company">
+                        <i class="fas fa-building"></i>
+                        <span>GreenEarth Nonprofit</span>
+                    </div>
+                    <h3>Environmental Advocacy Intern</h3>
+                    <p>Help create inclusive environmental education materials for diverse learners.</p>
+                    <div class="internship-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Chicago, IL</span>
+                        <span><i class="fas fa-clock"></i> Full-time</span>
+                    </div>
+                    <span class="tag accommodation">Sensory-Friendly Workspace</span>
+                    <span class="tag accommodation">Mentor Provided</span>
+                </div>
+            </div>
+            <div class="internship-card">
+                <div class="internship-img" style="background-color: #ff9e44;"></div>
+                <div class="internship-content">
+                    <div class="company">
+                        <i class="fas fa-building"></i>
+                        <span>Inclusive Design Studio</span>
+                    </div>
+                    <h3>UX Design Intern</h3>
+                    <p>Work on creating accessible digital experiences for people with diverse abilities.</p>
+                    <div class="internship-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Austin, TX</span>
+                        <span><i class="fas fa-clock"></i> Part-time</span>
+                    </div>
+                    <span class="tag accommodation">ASL Interpretation Available</span>
+                    <span class="tag accommodation">Adaptive Equipment</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section class="how-it-works">
+        <div class="section-title">
+            <h2>How AbilityIntern Works</h2>
+            <p>Simple steps to find your perfect internship match</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Create Profile</h3>
+                <p>Build your profile highlighting your skills, interests, and accommodation needs.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Find Opportunities</h3>
+                <p>Browse vetted internships that match your criteria and abilities.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Apply</h3>
+                <p>Submit applications and get support throughout the process.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Start Your Internship</h3>
+                <p>Begin your internship with ongoing support from our team.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="section-title">
+            <h2>Success Stories</h2>
+            <p>Hear from students who found their path through AbilityIntern</p>
+        </div>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "As a student on the autism spectrum, I was nervous about internships. AbilityIntern connected me with an employer who understood my needs and provided a structured environment where I could thrive."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">JD</div>
+                    <div>
+                        <h4>Jamie Davis</h4>
+                        <p>Data Analysis Intern at TechSolutions</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "My physical disability made me doubt I could find a suitable internship. AbilityIntern found me a remote opportunity with a company that provided all the accommodations I needed to be successful."
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">MR</div>
+                    <div>
+                        <h4>Miguel Rodriguez</h4>
+                        <p>Marketing Intern at Inclusive Brands</p>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-card">
+                <div class="testimonial-content">
+                    "The resources and support from AbilityIntern helped me build confidence in my abilities. My internship turned into a full-time job offer after graduation!"
+                </div>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SC</div>
+                    <div>
+                        <h4>Sarah Chen</h4>
+                        <p>Graphic Design Intern at CreativeAccess</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta">
+        <h2>Ready to Start Your Journey?</h2>
+        <p>Join thousands of students who have found meaningful internship experiences through our platform.</p>
+        <button class="btn btn-primary">Create Your Profile</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>AbilityIntern</h3>
+                <p>Connecting students with special needs to inclusive internship opportunities.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>For Students</h3>
+                <ul>
+                    <li><a href="#">Browse Internships</a></li>
+                    <li><a href="#">Resources</a></li>
+                    <li><a href="#">Resume Builder</a></li>
+                    <li><a href="#">Interview Preparation</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>For Employers</h3>
+                <ul>
+                    <li><a href="#">Post an Internship</a></li>
+                    <li><a href="#">Inclusion Training</a></li>
+                    <li><a href="#">Success Stories</a></li>
+                    <li><a href="#">Partnerships</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fas fa-envelope"></i> support@abilityintern.org</li>
+                    <li><i class="fas fa-phone"></i> (800) 123-4567</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Accessibility Way, Diversity City</li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 AbilityIntern. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Accessibility Tools -->
+    <div class="accessibility-tools">
+        <button class="accessibility-btn" onclick="toggleAccessibilityMenu()">
+            <i class="fas fa-universal-access"></i>
+        </button>
+        <div class="accessibility-menu" id="accessibilityMenu">
+            <div class="accessibility-option">
+                <input type="checkbox" id="highContrast">
+                <label for="highContrast">High Contrast Mode</label>
+            </div>
+            <div class="accessibility-option">
+                <input type="checkbox" id="textToSpeech">
+                <label for="textToSpeech">Text-to-Speech</label>
+            </div>
+            <div class="accessibility-option">
+                <label for="fontSize">Font Size</label>
+                <select id="fontSize">
+                    <option>Normal</option>
+                    <option>Large</option>
+                    <option>X-Large</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Toggle accessibility menu
+        function toggleAccessibilityMenu() {
+            const menu = document.getElementById('accessibilityMenu');
+            menu.classList.toggle('show');
+        }
+        
+        // Close accessibility menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('accessibilityMenu');
+            const btn = document.querySelector('.accessibility-btn');
+            
+            if (!menu.contains(event.target) && !btn.contains(event.target)) {
+                menu.classList.remove('show');
+            }
+        });
+        
+        // Text-to-speech functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const textToSpeechToggle = document.getElementById('textToSpeech');
+            
+            textToSpeechToggle.addEventListener('change', function() {
+                if (this.checked) {
+                    alert('Text-to-speech enabled. Click on any text to hear it read aloud.');
+                    enableTextToSpeech();
+                } else {
+                    disableTextToSpeech();
+                }
+            });
+        });
+        
+        function enableTextToSpeech() {
+            // This would integrate with a text-to-speech API in a real implementation
+            document.body.style.cursor = 'pointer';
+            
+            document.addEventListener('click', speakText);
+        }
+        
+        function disableTextToSpeech() {
+            document.body.style.cursor = 'default';
+            document.removeEventListener('click', speakText);
+        }
+        
+        function speakText(event) {
+            // In a real implementation, this would use the Web Speech API
+            const text = event.target.textContent || event.target.alt || event.target.value;
+            if (text && text.trim().length > 2) {
+                alert("Text-to-speech would read: " + text.substring(0, 100) + "...");
+                // Actual implementation would use:
+                // const utterance = new SpeechSynthesisUtterance(text);
+                // speechSynthesis.speak(utterance);
+            }
+        }
+    </script>
+</body>
+</html>
