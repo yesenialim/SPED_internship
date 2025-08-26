@@ -144,6 +144,7 @@
         }
         
         .search-box {
+            position: relative;
             background: white;
             border-radius: 50px;
             padding: 0.5rem;
@@ -159,6 +160,7 @@
             border-radius: 50px;
             outline: none;
             font-size: 1rem;
+            padding-right: 3rem; /* Make space for voice button */
         }
         
         .search-box button {
@@ -169,6 +171,242 @@
             padding: 0.8rem 1.5rem;
             cursor: pointer;
             font-weight: 500;
+            margin-left: 0.5rem;
+        }
+        
+        .voice-search-btn {
+            position: absolute;
+            right: 110px; /* Position between input and search button */
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            cursor: pointer;
+            font-size: 1.2rem;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+        
+        .voice-search-btn:hover {
+            background: var(--light-gray);
+        }
+        
+        .voice-search-btn.listening {
+            color: var(--danger);
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: translateY(-50%) scale(1); }
+            50% { transform: translateY(-50%) scale(1.1); }
+            100% { transform: translateY(-50%) scale(1); }
+        }
+        
+        .voice-feedback {
+            position: fixed;
+            bottom: 100px;
+            right: 20px;
+            background: white;
+            border-radius: 10px;
+            padding: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            display: none;
+            max-width: 300px;
+        }
+        
+        .voice-feedback.active {
+            display: block;
+        }
+        
+        .voice-feedback-text {
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .voice-feedback-transcript {
+            font-style: italic;
+            color: var(--gray);
+        }
+        
+        /* Chatbot Styles */
+        .chatbot-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            z-index: 1000;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            transform: translateY(calc(100% - 60px));
+        }
+        
+        .chatbot-container.expanded {
+            transform: translateY(0);
+        }
+        
+        .chatbot-header {
+            background: linear-gradient(135deg, var(--primary), #2c3e50);
+            color: white;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .chatbot-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .chatbot-title h3 {
+            font-weight: 500;
+        }
+        
+        .chatbot-actions {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chatbot-actions button {
+            background: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .chatbot-messages {
+            flex: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .message {
+            max-width: 80%;
+            padding: 0.8rem;
+            border-radius: 15px;
+            line-height: 1.4;
+            position: relative;
+        }
+        
+        .user-message {
+            align-self: flex-end;
+            background-color: var(--primary);
+            color: white;
+            border-bottom-right-radius: 5px;
+        }
+        
+        .bot-message {
+            align-self: flex-start;
+            background-color: var(--light);
+            color: var(--dark);
+            border-bottom-left-radius: 5px;
+        }
+        
+        .message-time {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            margin-top: 5px;
+            text-align: right;
+        }
+        
+        .chatbot-input {
+            display: flex;
+            padding: 0.8rem;
+            border-top: 1px solid var(--light-gray);
+            background: var(--light);
+        }
+        
+        .chatbot-input input {
+            flex: 1;
+            padding: 0.8rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 20px;
+            outline: none;
+            font-size: 0.9rem;
+        }
+        
+        .chatbot-input button {
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            margin-left: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .suggestion-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: var(--light);
+            border-top: 1px solid var(--light-gray);
+        }
+        
+        .chip {
+            background: var(--primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 16px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .chip:hover {
+            background: #3a5a84;
+        }
+        
+        .typing-indicator {
+            display: none;
+            align-self: flex-start;
+            background-color: var(--light);
+            padding: 0.8rem;
+            border-radius: 15px;
+            border-bottom-left-radius: 5px;
+            margin-bottom: 0.5rem;
+        }
+        
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .typing-dot {
+            width: 8px;
+            height: 8px;
+            background-color: var(--gray);
+            border-radius: 50%;
+            animation: typing-animation 1.4s infinite ease-in-out;
+        }
+        
+        .typing-dot:nth-child(1) { animation-delay: 0s; }
+        .typing-dot:nth-child(2) { animation-delay: 0.2s; }
+        .typing-dot:nth-child(3) { animation-delay: 0.4s; }
+        
+        @keyframes typing-animation {
+            0%, 60%, 100% { transform: translateY(0); }
+            30% { transform: translateY(-5px); }
         }
         
         /* Features Section */
@@ -502,6 +740,12 @@
                 flex-direction: column;
                 align-items: flex-start;
             }
+            
+            .chatbot-container {
+                width: 300px;
+                right: 10px;
+                bottom: 10px;
+            }
         }
         
         .accessibility-tools {
@@ -584,11 +828,61 @@
             <h2>Find the Perfect Internship for Your Unique Abilities</h2>
             <p>AbilityIntern connects students with special needs to inclusive employers who value diversity and provide supportive work environments.</p>
             <div class="search-box">
-                <input type="text" placeholder="Search internships by role, company, or skill...">
-                <button>Search</button>
+                <input type="text" id="searchInput" placeholder="Search internships by role, company, or skill...">
+                <button class="voice-search-btn" id="voiceSearchBtn" title="Voice Search">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <button id="searchBtn">Search</button>
+            </div>
+            <div id="voiceSupportNote" style="margin-top: 1rem; font-size: 0.9rem; display: none;">
+                <i class="fas fa-info-circle"></i> Voice search is supported in Chrome, Edge, and Safari
             </div>
         </div>
     </section>
+
+    <!-- Chatbot Container -->
+    <div class="chatbot-container" id="chatbotContainer">
+        <div class="chatbot-header" onclick="toggleChatbot()">
+            <div class="chatbot-title">
+                <i class="fas fa-robot"></i>
+                <h3>AbilityIntern Assistant</h3>
+            </div>
+            <div class="chatbot-actions">
+                <button onclick="toggleChatbot()"><i class="fas fa-minus"></i></button>
+                <button onclick="closeChatbot()"><i class="fas fa-times"></i></button>
+            </div>
+        </div>
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="message bot-message">
+                Hi there! 👋 I'm your AbilityIntern assistant. How can I help you find the perfect internship today?
+                <div class="message-time">Just now</div>
+            </div>
+        </div>
+        <div class="typing-indicator" id="typingIndicator">
+            <div class="typing-dots">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+        </div>
+        <div class="suggestion-chips">
+            <div class="chip" onclick="sendSuggestion('What internships are available?')">Available Internships</div>
+            <div class="chip" onclick="sendSuggestion('How do I apply?')">Application Process</div>
+            <div class="chip" onclick="sendSuggestion('What accommodations are offered?')">Accommodations</div>
+        </div>
+        <div class="chatbot-input">
+            <input type="text" id="userInput" placeholder="Type your message here..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <!-- Voice Feedback Box -->
+    <div class="voice-feedback" id="voiceFeedback">
+        <div class="voice-feedback-text" id="voiceFeedbackText">Listening...</div>
+        <div class="voice-feedback-transcript" id="voiceTranscript"></div>
+    </div>
 
     <!-- Features Section -->
     <section class="features">
@@ -686,7 +980,7 @@
                     <h3>Environmental Advocacy Intern</h3>
                     <p>Help create inclusive environmental education materials for diverse learners.</p>
                     <div class="internship-meta">
-                        <span><i class="fas fa-map-marker-alt"></i> Chicago, IL</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Chinatown</span>
                         <span><i class="fas fa-clock"></i> Full-time</span>
                     </div>
                     <span class="tag accommodation">Sensory-Friendly Workspace</span>
@@ -703,7 +997,7 @@
                     <h3>UX Design Intern</h3>
                     <p>Work on creating accessible digital experiences for people with diverse abilities.</p>
                     <div class="internship-meta">
-                        <span><i class="fas fa-map-marker-alt"></i> Austin, TX</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Orchard, SG</span>
                         <span><i class="fas fa-clock"></i> Part-time</span>
                     </div>
                     <span class="tag accommodation">ASL Interpretation Available</span>
@@ -831,8 +1125,8 @@
                 <h3>Contact Us</h3>
                 <ul>
                     <li><i class="fas fa-envelope"></i> support@abilityintern.org.sg</li>
-                    <li><i class="fas fa-phone"></i> +65 1234 5678</li>
-                    <li><i class="fas fa-map-marker-alt"></i> 123 Accessibility Way, Singapore City</li>
+                    <li><i class="fas fa-phone"></i> (+67)1234 5678</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Accessibility Way, Singapore
                 </ul>
             </div>
         </div>
@@ -867,6 +1161,273 @@
     </div>
 
     <script>
+        // Chatbot functionality
+        const chatMessages = document.getElementById('chatMessages');
+        const userInput = document.getElementById('userInput');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const chatbotContainer = document.getElementById('chatbotContainer');
+        
+        // Knowledge base for the chatbot with enhanced responses
+        const knowledgeBase = {
+            greetings: [
+                "Hello! 👋 I'm here to help you find the perfect internship. What can I assist you with today?",
+                "Hi there! 😊 Ready to explore internship opportunities tailored to your needs?",
+                "Welcome! I'm your AbilityIntern assistant. How can I help you on your internship journey?"
+            ],
+            internships: [
+                "We have several internships available right now! 🎯 TechForAll is looking for software testers, GreenEarth needs environmental advocates, and Inclusive Design Studio wants UX designers.",
+                "Currently, we have opportunities in technology, environmental advocacy, and design. Would you like me to help you filter based on your interests?",
+                "Our featured internships include remote software testing, environmental advocacy in Chinatown, and UX design at Orchard. Which area interests you most?"
+            ],
+            application: [
+                "The application process is simple! 📝 First, create your profile highlighting your skills and accommodation needs. Then browse opportunities and apply directly through our platform.",
+                "To apply: 1) Complete your profile 2) Browse vetted internships 3) Submit your application 4) We'll provide support throughout the process!",
+                "We've streamlined the application process to be accessible for everyone. You can apply in just a few clicks, and we offer assistance if you need it."
+            ],
+            accommodations: [
+                "We ensure all listed internships provide necessary accommodations! ♿ Options include wheelchair accessibility, flexible schedules, sensory-friendly workspaces, mentor support, and more.",
+                "Accommodations vary by employer but may include: wheelchair access, flexible hours, remote work options, assistive technologies, and dedicated support mentors.",
+                "Every internship on our platform is vetted for accessibility. Common accommodations include adaptive equipment, modified workspaces, flexible scheduling, and communication support."
+            ],
+            support: [
+                "We provide comprehensive support! 🤝 This includes resume building, interview preparation, workplace readiness training, and ongoing assistance during your internship.",
+                "Our support services include: Resume builder tool, mock interviews, accessibility consultation, and a dedicated support team throughout your internship.",
+                "From application to completion, we're here to help! We offer career counseling, accommodation coordination, and mentorship programs."
+            ],
+            companies: [
+                "We partner with inclusive employers who value diversity! 🌟 Our current partners include TechForAll, GreenEarth Nonprofit, and Inclusive Design Studio.",
+                "Our employer network consists of organizations committed to inclusive hiring practices. They receive training on supporting neurodiverse and differently-abled interns.",
+                "We work with companies across various industries that have demonstrated commitment to accessibility and inclusion in their workplace culture."
+            ],
+            default: [
+                "I'm not sure I understand. Could you try rephrasing your question?",
+                "I don't have information about that yet. Try asking about internships, applications, or accommodations.",
+                "That's beyond my current knowledge. Please contact our support team for more specific assistance."
+            ]
+        };
+
+        // Function to toggle chatbot visibility
+        function toggleChatbot() {
+            chatbotContainer.classList.toggle('expanded');
+        }
+        
+        // Function to close chatbot
+        function closeChatbot() {
+            chatbotContainer.style.display = 'none';
+        }
+        
+        // Function to send a message
+        function sendMessage() {
+            const message = userInput.value.trim();
+            if (message === '') return;
+            
+            // Add user message to chat
+            addMessage(message, 'user');
+            userInput.value = '';
+            
+            // Show typing indicator
+            typingIndicator.style.display = 'flex';
+            
+            // Process message and respond after a short delay
+            setTimeout(() => {
+                typingIndicator.style.display = 'none';
+                const response = generateResponse(message);
+                addMessage(response, 'bot');
+                
+                // Auto-scroll to bottom
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            }, 1000 + Math.random() * 1000); // Random delay between 1-2 seconds
+        }
+
+        // Function to handle suggestion chips
+        function sendSuggestion(suggestion) {
+            userInput.value = suggestion;
+            sendMessage();
+        }
+
+        // Function to handle Enter key press
+        function handleKeyPress(event) {
+            if (event.key === 'Enter') {
+                sendMessage();
+            }
+        }
+
+        // Function to add a message to the chat
+        function addMessage(text, sender) {
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message');
+            messageElement.classList.add(sender + '-message');
+            messageElement.textContent = text;
+            
+            // Add timestamp
+            const timeElement = document.createElement('div');
+            timeElement.classList.add('message-time');
+            timeElement.textContent = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            messageElement.appendChild(timeElement);
+            
+            chatMessages.appendChild(messageElement);
+            
+            // Auto-scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        // Function to generate a response based on user input
+        function generateResponse(input) {
+            const lowerInput = input.toLowerCase();
+            
+            // Check for greetings
+            if (lowerInput.includes('hi') || lowerInput.includes('hello') || lowerInput.includes('hey') || 
+                lowerInput.includes('good morning') || lowerInput.includes('good afternoon')) {
+                return getRandomResponse(knowledgeBase.greetings);
+            }
+            
+            // Check for internship-related questions
+            if (lowerInput.includes('internship') || lowerInput.includes('opportunity') || 
+                lowerInput.includes('position') || lowerInput.includes('job') || 
+                lowerInput.includes('opening') || lowerInput.includes('available')) {
+                return getRandomResponse(knowledgeBase.internships);
+            }
+            
+            // Check for application-related questions
+            if (lowerInput.includes('apply') || lowerInput.includes('application') || 
+                lowerInput.includes('process') || lowerInput.includes('how to') || 
+                lowerInput.includes('procedure') || lowerInput.includes('step')) {
+                return getRandomResponse(knowledgeBase.application);
+            }
+            
+            // Check for accommodation-related questions
+            if (lowerInput.includes('accommodat') || lowerInput.includes('support') || 
+                lowerInput.includes('accessibility') || lowerInput.includes('need') || 
+                lowerInput.includes('disability') || lowerInput.includes('special')) {
+                return getRandomResponse(knowledgeBase.accommodations);
+            }
+            
+            // Check for support-related questions
+            if (lowerInput.includes('help') || lowerInput.includes('assist') || 
+                lowerInput.includes('resource') || lowerInput.includes('guide')) {
+                return getRandomResponse(knowledgeBase.support);
+            }
+            
+            // Check for company-related questions
+            if (lowerInput.includes('company') || lowerInput.includes('employer') || 
+                lowerInput.includes('partner') || lowerInput.includes('organization')) {
+                return getRandomResponse(knowledgeBase.companies);
+            }
+            
+            // Default response for unrecognized input
+            return getRandomResponse(knowledgeBase.default);
+        }
+
+        // Function to get a random response from an array
+        function getRandomResponse(responses) {
+            return responses[Math.floor(Math.random() * responses.length)];
+        }
+
+        // Voice Search Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const voiceSearchBtn = document.getElementById('voiceSearchBtn');
+            const searchBtn = document.getElementById('searchBtn');
+            const voiceFeedback = document.getElementById('voiceFeedback');
+            const voiceFeedbackText = document.getElementById('voiceFeedbackText');
+            const voiceTranscript = document.getElementById('voiceTranscript');
+            const voiceSupportNote = document.getElementById('voiceSupportNote');
+            
+            // Check if browser supports speech recognition
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            let recognition = null;
+            
+            if (SpeechRecognition) {
+                recognition = new SpeechRecognition();
+                recognition.continuous = false;
+                recognition.interimResults = true;
+                recognition.lang = 'en-US';
+                
+                voiceSupportNote.style.display = 'block';
+                
+                recognition.onstart = function() {
+                    voiceSearchBtn.classList.add('listening');
+                    voiceFeedbackText.textContent = "Listening...";
+                    voiceTranscript.textContent = "";
+                    voiceFeedback.classList.add('active');
+                };
+                
+                recognition.onresult = function(event) {
+                    const transcript = Array.from(event.results)
+                        .map(result => result[0])
+                        .map(result => result.transcript)
+                        .join('');
+                    
+                    voiceTranscript.textContent = transcript;
+                    
+                    // If the result is final, set it as search input
+                    if (event.results[0].isFinal) {
+                        searchInput.value = transcript;
+                    }
+                };
+                
+                recognition.onend = function() {
+                    voiceSearchBtn.classList.remove('listening');
+                    voiceFeedbackText.textContent = "Processing...";
+                    
+                    // Hide feedback after a short delay
+                    setTimeout(() => {
+                        voiceFeedback.classList.remove('active');
+                    }, 1500);
+                };
+                
+                recognition.onerror = function(event) {
+                    voiceSearchBtn.classList.remove('listening');
+                    voiceFeedbackText.textContent = "Error: " + event.error;
+                    
+                    setTimeout(() => {
+                        voiceFeedback.classList.remove('active');
+                    }, 3000);
+                };
+                
+                voiceSearchBtn.addEventListener('click', function() {
+                    if (voiceSearchBtn.classList.contains('listening')) {
+                        recognition.stop();
+                    } else {
+                        try {
+                            recognition.start();
+                        } catch (error) {
+                            voiceFeedbackText.textContent = "Please allow microphone access";
+                            voiceFeedback.classList.add('active');
+                            
+                            setTimeout(() => {
+                                voiceFeedback.classList.remove('active');
+                            }, 3000);
+                        }
+                    }
+                });
+            } else {
+                // Browser doesn't support speech recognition
+                voiceSearchBtn.style.display = 'none';
+            }
+            
+            // Regular search functionality
+            searchBtn.addEventListener('click', performSearch);
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
+            });
+            
+            function performSearch() {
+                const query = searchInput.value.trim();
+                if (query) {
+                    // In a real application, this would filter or fetch search results
+                    alert(`Searching for: "${query}"\n\nThis would display relevant internship results in a real application.`);
+                    
+                    // Scroll to internship section
+                    document.querySelector('.internships').scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+        
         // Toggle accessibility menu
         function toggleAccessibilityMenu() {
             const menu = document.getElementById('accessibilityMenu');
